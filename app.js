@@ -1,10 +1,11 @@
+// app.js
+
+// Import required modules
 let createError = require("http-errors");
 let express = require("express");
-
 const path = require("path");
 let cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-
 let logger = require("morgan");
 let hbs = require("express-handlebars");
 let multer = require("multer");
@@ -61,6 +62,7 @@ app.engine(
     partialsDir: __dirname + "/views/partials/",
   })
 );
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -77,4 +79,5 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
+// Export the app for use with PM2
 module.exports = app;
