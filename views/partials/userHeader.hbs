@@ -1,0 +1,115 @@
+
+<!-- Start Header Area -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="ml-2 navbar-brand logo_h" href="index.html"><h2 style="color: #9f396c;">FonoKart</h2></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+							{{#if user}}
+
+							{{!-- <li class="nav-item"><a class="nav-link" href="/wishlist">Wishlist</a></li> --}}
+
+							<li class="nav-item"><a class="nav-link" href="/orders">Orders</a></li>
+							<li class="nav-item"><a class="nav-link" href="/wishlist">Wishlist</a></li>
+
+
+
+							{{/if}}
+
+							
+								 {{#if user}}
+								<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false" style="color: #ff0066;">{{userData.name}}</a>
+								 
+								<ul class="dropdown-menu">
+									
+									<li class="nav-item"><a class="nav-link" href="/userprofile">View Profile</a></li>
+									
+									{{!-- <li class="nav-item"><a class="nav-link" href="/orders">Tracking</a></li> --}}
+									<li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+								</ul>
+							</li>
+							{{else}}
+
+							<li class="nav-item submenu dropdown">
+								
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Account</a>
+
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+									<li class="nav-item"><a class="nav-link" href="/signup">Sign up</a></li>
+								
+								</ul>
+							</li>
+
+							{{/if}} 
+							
+							{{#if user}}
+							<li class="nav-item submenu dropdown">
+								<a href="/wallet" class="nav-link dropdown-toggle"  role="button"
+									aria-haspopup="true" aria-expanded="false">Wallet</a>
+							</li>
+							{{/if}}
+						</ul>
+
+
+						<ul class="nav navbar-nav navbar-right">
+
+							{{#if user}}
+
+							{{!-- <li class="nav-item">
+								<a href="/cart" class="cart">
+									
+									<span id="cart-count" class="ti-bag">
+										<span style="color: #ff6f00">{{cartCount}}</span>
+									</span>
+
+									
+
+								</a>
+							</li> --}}
+							<li class="nav-item">
+								<a href="/cart" class="cart">
+									<span id="cart-count" class="ti-bag">
+										<span class="d-sm">
+											<span class=" d-sm-inline" style="color: #ff6f00">{{cartCount}}</span>
+										</span>
+							
+									</span>
+								</a>
+							</li>
+							{{/if}}
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</div>
+		{{!-- <div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div> --}}
+	</header>
+	<section class="banner-area organic-breadcrumb"></section>
+	<!-- End Header Area -->

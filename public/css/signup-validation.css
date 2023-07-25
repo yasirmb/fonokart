@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+						@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+
+						.form1 {
+							padding: 5px 40px;
+						}
+
+						.form-control1 {
+							margin-bottom: 10px;
+							padding-bottom: 20px;
+							position: relative;
+						}
+
+						.form-control1 label {
+
+							margin-bottom: 3px;
+						}
+
+						.form-control1 input {
+							border: 2px solid #f0f0f0;
+							border-radius: 4px;
+							display: block;
+							font-family: inherit;
+							font-size: 14px;
+							padding: 10px;
+							width: 100%;
+						}
+
+						.form-control1 input:focus {
+							outline: 0;
+							border-color: #777;
+						}
+
+						.form-control1.success input {
+							border-color: #2ecc71;
+						}
+
+						.form-control1.error input {
+							border-color: #e74c3c;
+						}
+
+						.form-control1 i {
+							visibility: hidden;
+							position: absolute;
+							top: 40px;
+							right: 10px;
+						}
+
+						.form-control1.success i.fa-check-circle {
+							color: #2ecc71;
+							visibility: visible;
+						}
+
+						.form-control1.error i.fa-exclamation-circle {
+							color: #e74c3c;
+							visibility: visible;
+						}
+
+						.form-control1 small {
+							color: #e74c3c;
+							position: absolute;
+							bottom: 0;
+							left: 0;
+							visibility: hidden;
+						}
+
+						.form-control1.error small {
+							visibility: visible;
+						}
+
+						.floating-text {
+							background-color: #001F61;
+							border-radius: 10px 10px 0 0;
+							color: #fff;
+							font-family: 'Muli';
+							padding: 7px 15px;
+							position: fixed;
+							bottom: 0;
+							left: 50%;
+							transform: translateX(-50%);
+							text-align: center;
+							z-index: 998;
+						}
+
+						.floating-text a {
+							color: #FF7500;
+							text-decoration: none;
+						}

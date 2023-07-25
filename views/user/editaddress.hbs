@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form</title>
+  
+</head>
+<body>
+  <form class="my-form" action="/editaddresssumbit" method="post">
+    <div class="row mb-3">
+      <label for="uname" class="col-md-4 col-lg-3 col-form-label">Name</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="uname" type="text" class="form-control" id="uname" placeholder="Name" required value="{{getOneAddress.Address.uname}}">
+        {{!-- <input name="uname" type="text" class="form-control" id="uname" placeholder="Name" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="email" type="email" class="form-control" id="email" placeholder="Email" required value="{{getOneAddress.Address.email}}">
+        {{!-- <input name="email" type="email" class="form-control" id="email" placeholder="Email" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="number" type="number" class="form-control" id="phone" placeholder="phone" required value="{{getOneAddress.Address.number}}">
+        {{!-- <input name="number" type="number" class="form-control" id="phone" placeholder="Phone" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="houseNumber" class="col-md-4 col-lg-3 col-form-label">House Number</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="houseNumber" type="number" class="form-control" id="houseNumber" placeholder="House Number" required value="{{getOneAddress.Address.houseNumber}}">
+        {{!-- <input name="houseNumber" type="number" class="form-control" id="houseNumber" placeholder="House Number" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="streetNumber" class="col-md-4 col-lg-3 col-form-label">Street Number</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="streetNumber" type="number" class="form-control" id="streetNumber" placeholder="Street Number" required value="{{getOneAddress.Address.streetNumber}}">
+        {{!-- <input name="streetNumber" type="number" class="form-control" id="streetNumber" placeholder="Street Number" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="town" class="col-md-4 col-lg-3 col-form-label">Town/City</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="town" type="text" class="form-control" id="town" placeholder="Town/City" required value="{{getOneAddress.Address.state}}">
+        {{!-- <input name="town" type="text" class="form-control" id="town" placeholder="Town/City" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="state" class="col-md-4 col-lg-3 col-form-label">State</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="state" type="text" class="form-control" id="state" placeholder="" required value="{{getOneAddress.Address.town}}">
+        {{!-- <input name="state" type="text" class="form-control" id="state" placeholder="State" required> --}}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="pincode" class="col-md-4 col-lg-3 col-form-label">Pincode</label>
+      <div class="col-md-8 col-lg-9">
+        <input name="pincode" type="number" class="form-control" id="pincode" placeholder="Pincode" required value="{{getOneAddress.Address.pincode}}">
+        {{!-- <input name="pincode" type="number" class="form-control" id="pincode" placeholder="Pincode" required> --}}
+      </div>
+    </div>
+<input type="hidden" name="userAddressId" value="{{getOneAddress.Address.userAddressId}}">
+
+    <div class="text-center">
+      <button type="submit" value="submit" id="changeButton" class="btn btn-primary">Change</button>
+
+    </div>
+  </form>
+</body>
+<style>
+    /* Example CSS styles for the form */
+    .my-form {
+      max-width: 2000px;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    .my-form .row {
+      margin-bottom: 15px;
+    }
+
+    .my-form label {
+      font-weight: bold;
+    }
+
+    .my-form input[type="text"],
+    .my-form input[type="email"],
+    .my-form input[type="number"],
+    .my-form button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .my-form button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      padding: 6px ,18px; /* Decrease the padding to make the button smaller */
+      font-size: 12px; /* Decrease the font size to make the button text smaller */
+    }
+
+    .my-form button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+ 
+ <script>
+    // Get the userId from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    
+  
+
+  
+   
+    // Rest of the JavaScript code
+  </script> 
+  
+ 
+
+
+</html> 

@@ -1,0 +1,55 @@
+
+
+
+
+
+
+
+ <section class="order_details section_gap">
+	<div class="container">
+		<h3 class="title_confirmation">There is an error while placing order. </h3>
+		<div class="d-flex align-items-center"><a class="btn btn-primary mx-auto mb-5" href="/orders">View All
+				Orders</a></div>
+
+		<div class="row order_d_inner">
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>Order Info</h4>
+					<ul class="list">
+						<li><a href="#"><span>Order ID</span> : {{orders._id}}</a></li>
+						<li><a href="#"><span>Date</span> : {{orders.date}}</a></li>
+						<li><a href="#"><span>Total</span> :₹{{orders.totalAmount}}</a></li>
+						<li><a href="#"><span>Payment method</span> : {{orders.paymentMethod}}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>Billing Address</h4>
+					<ul class="list">
+						<li><a href="#"><span>Address</span> : {{orders.deliveryDetails.address}}</a></li>
+						<li><a href="#"><span>City</span> : {{orders.deliveryDetails.Town}}</a></li>
+						<li><a href="#"><span>Postcode </span> : {{orders.deliveryDetails.zip}}</a></li>
+						<li><a href="#"><span>Mobile</span> : {{orders.deliveryDetails.mobile}}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="details_item">
+					<h4>Shipping Address</h4>
+					<ul class="list">
+						<li><a href="#"><span>Address</span> : {{orders.deliveryDetails.address}}</a></li>
+						<li><a href="#"><span>City</span> : {{orders.deliveryDetails.Town}}</a></li>
+						<li><a href="#"><span>Postcode </span> : {{orders.deliveryDetails.zip}}</a></li>
+						<li><a href="#"><span>Mobile</span> : {{orders.deliveryDetails.mobile}}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</section>
+<script>
+	
+</script>
+

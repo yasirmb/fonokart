@@ -1,0 +1,129 @@
+
+
+<section>
+  {{#each oneOrderProduct}}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-4">
+        <div class="card text-black">
+          <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+          <img src="/product-pictures/{{this.product.image.[0]}}" class="card-img-top" alt="Apple Computer" />
+          <div class="card-body">
+            <div class="text-center">
+              <h5 class="card-title">{{this.product.name}}</h5>
+            </div>
+            <div class="product-details">
+              <div class="d-flex justify-content-between">
+                <h6 class="product-category"><span>Category:</span> {{this.product.categoryid}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h6 class="product-size"><span>Stock:</span> {{this.product.stock}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h6 class="product-color"><span>Color:</span> {{this.product.color}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+                <h6 class="product-description"><span>Description:</span> {{this.product.description}}</h6>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</section>
+
+<style>
+  /* Add custom styles here */
+
+  /* Card styles */
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  /* Product details styles */
+  .product-details {
+    margin-top: 10px;
+  }
+
+  .product-category {
+    color: rgb(117, 117, 119);
+    margin-bottom: 5px;
+  }
+
+  .product-size {
+    color: rgb(117, 117, 119);
+    margin-bottom: 5px;
+  }
+
+  .product-color {
+    color: rgb(117, 117, 119);
+    margin-bottom: 5px;
+  }
+
+  .product-description {
+    color: rgb(117, 117, 119);
+    margin-bottom: 5px;
+  }
+</style>
+
+
+
+
+{{!-- <section>
+    {{#each oneOrderProduct}}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-4">
+        <div class="card text-black">
+          <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+          <img src="/product-pictures/{{this.product.image.[0]}}"
+            class="card-img-top" alt="Apple Computer" />
+          <div class="card-body">
+            <div class="text-center">
+              <h5 class="card-title">{{this.product.name}}</h5>
+            </div>
+           
+            <div>
+              <div class="d-flex justify-content-between">
+              
+                <h6  class=""><span style="color: rgb(117, 117, 119);">Category :</span>{{this.product.categoryid}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+               
+                     <h6  class=""><span style="color: rgb(117, 117, 119);">Size :</span>{{this.product.stock}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+            
+                 <h6  class=""><span style="color: rgb(117, 117, 119);">Color :</span>{{this.product.color}}</h6>
+              </div>
+              <div class="d-flex justify-content-between">
+               
+                <h6  class=""><span style="color: rgb(117, 117, 119);">Description :</span>{{this.product.description}}</h6>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</section> --}}

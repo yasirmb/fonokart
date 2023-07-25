@@ -1,0 +1,221 @@
+<style>
+  .search-wrapper {
+    padding-left: 800px;
+    margin-bottom: 20px;
+
+  }
+
+  label[for="search"] {
+    margin-right: 10px;
+    /* adjust the margin as needed */
+  }
+</style>
+
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+
+
+  <!-- ======= Sidebar ======= -->
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Order Tables</h1>
+
+    </div>
+
+
+
+    <section class="section">
+      <div class="row">
+
+        {{!-- <div class="search-wrapper">
+          <label for="search">Search</label>
+          <input type="search" id="search" onkeyup="searchByInput()">
+        </div> --}}
+
+
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p><code></code> </p>
+              <!-- Bordered Table -->
+              <table class="table table-bordered" id="orderTable">
+                <thead>
+
+                  <tr>
+                    <th scope="col">sl.no</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Method</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">View</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+                  
+
+                  {{#each order}}
+                    
+                  
+                  <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{this.deliveryDetails.name}}</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.status}}</td>
+                    <td>₹{{this.totalAmount}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>
+
+
+                      <select onchange="deliveryStatusUpdate(value,'{{this._id}}' , {{this.userid}})"
+                        name="form-control item" id="">
+
+
+                        <option hidden value="{{this.status}}" selected>
+                          {{this.status}}
+                        </option>
+
+                        {{#isEqual this.status 'placed'}}
+                        <option value="Shipped">Shipped</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancelled">Cancelled</option>
+                        {{/isEqual}} 
+
+                        {{#isEqual this.status 'Shipped'}}
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancelled">Cancelled</option>
+                        {{/isEqual}}
+
+                        {{#isEqual this.status 'Delivered'}}
+                       <h5>Delivered</h5>
+                        {{/isEqual}}
+
+                      </select>
+
+
+                    </td>
+                    <td>
+                      <a href="/admin/view-product?id={{this._id}}" class="btn btn-secondary">view products</a>
+                    </td>
+                  </tr>
+                 
+                  {{/each}}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+  </main><!-- End #main -->
+
+
+ 
+  <script src="/helpers/admin-helpers.js"></script>
+
+
+
+  <script>
+
+
+
+    function deliveryStatusUpdate(value, orderId) {
+
+      $.ajax({
+        url: '/admin/product-status',
+        data: {
+          order: orderId,
+          valueChange: value
+        },
+        method: 'post',
+        success: function (response) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Order Status is changed successfully',
+            showConfirmButton: false,
+            timer: 1500
+          }).then(function () {
+            location.reload();
+          });
+        }
+      });
+
+
+    }
+
+
+   
+
+
+
+
+
+
+  </script>
+
+  {{!-- wants to put inside script tag --}}
+
+
+
+
+
+
+</body>
+
+</html>
+
+<style>
+  .search-wrapper {
+    display: flex;
+    padding-right: 100px;
+  }
+</style>
+
+<script>
+
+   
+    $(document).ready(function () {
+        var t = $('#orderTable').DataTable({
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    targets: 0,
+                },
+            ],
+            order: [[1, 'asc']],
+        });
+
+        t.on('order.dt search.dt', function () {
+            let i = 1;
+
+            t.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+    });
+
+</script>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       
+    

@@ -1,0 +1,88 @@
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table" id="orderTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order Details</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Details</th>
+                            {{!-- <th scope="col">Options</th> --}}
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {{#each orders}}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <p>Placed At: <br> {{this.date}}</p><br>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <p>Amount: <br>₹ {{this.totalAmount}}</p>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <p>Payment Method: <br>{{this.paymentMethod}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="media">
+                                    <div class="media-body">
+                                        <p>{{this.deliveryDetails.name}}</p>
+                                        <p>{{this.deliveryDetails.mobile}}</p>
+                                        <p>{{this.deliveryDetails.email}}</p>
+                                        <p>{{this.deliveryDetails.address}}</p>
+                                        <p>{{this.deliveryDetails.town}}</p>
+                                        <p>{{this.deliveryDetails.zip}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{this.status}}</h5>
+                            </td>
+
+                            <td>
+                                <a class="btn btn-link btn-light" href="/view-order-products/{{this._id}}">Details</a>
+
+                            </td>
+                            {{!-- <td>
+                                <a class="btn btn-link btn-light" href="/cancel-order-products/{{this._id}}">Cancel</a>
+                            </td> --}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{#for 1 pages 1}}
+                        <li class="page-item "><a class="page-link {{#ifCond this ../currentPage}} active {{/ifCond}}"
+                                href="/orders?page={{this}}">{{this}}</a></li>
+                        {{/for}}
+
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

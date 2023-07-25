@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Layouts</title>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Form Layouts</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Layouts</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+
+
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Edit Product Form</h5>
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3" action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" value="{{product.name}}">
+                    <label for="floatingName">Name</label>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="size" id="floatingEmail" placeholder="Model" value="{{product.stock}}">
+                    <label for="floatingEmail">Stock</label>
+                  </div>
+                </div>
+
+
+
+
+                <div class="col-sm-10">
+
+                  <select class="form-select" name="categoryid" aria-label="Default select example">
+                    {{#if product.categoryid}}
+                    <option value="{{product.categoryid}}">{{product.categoryid}}</option>
+                    {{else}}
+                    <option value="{{product.categoryid}}">Select category</option>
+                    {{/if}}
+                    {{#each getcategory}}
+                    <option value="{{this.name}}">{{this.name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" name="price" id="floatingPassword" placeholder="Price" value="{{product.price}}">
+                    <label for="floatingPassword">Price</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="color" id="floatingName" placeholder="Name" value="{{product.color}}">
+                    <label for="floatingName">colour</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" name="description" placeholder="description" name="description" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <label for="floatingTextarea">Description</label>
+                    <br>
+                  </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                  <label for="formFile" class="col-sm-2 col-form-label">Image Upload</label>
+                  <div class="col-sm-10">
+                    <div class="preview-images-zone d-flex">
+                      {{#each product.image}}
+                        <div class="preview-image mx-2">
+                          <img src="../product-pictures/{{this}}" alt="" style="width: 70px; height: 50px">
+                        </div>
+                      {{/each}}
+                    </div>
+                    <input class="form-control" name="image" multiple type="file" id="formFile">
+                  </div>
+
+                </div>
+
+
+
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <input type="text" value="{{product.description}}" id="description" hidden>
+
+  <script>
+    document.getElementById("floatingTextarea").defaultValue = document.getElementById("description").value;
+
+    function viewImages(event) {
+      var previewImagesZone = document.querySelector('.preview-images-zone');
+      previewImagesZone.innerHTML = '';
+
+      for (var i = 0; i < event.target.files.length; i++) {
+        var imageSrc = URL.createObjectURL(event.target.files[i]);
+        var previewImage = document.createElement('div');
+        previewImage.className = 'preview-image mx-2';
+        previewImage.innerHTML = '<img src="' + imageSrc + '" alt="" style="width: 70px; height: 50px">';
+        previewImagesZone.appendChild(previewImage);
+      }
+    }
+
+    document.getElementById('formFile').addEventListener('change', viewImages);
+  </script>
+
+</body>
+
+</html>
+
+
+
+{{!-- <body>
+
+  <!-- ======= Header ======= -->
+  
+
+  
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Form Layouts</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Layouts</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+       
+
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Edit Product Form</h5>
+
+              <!-- Floating Labels Form -->
+              <form class="row g-3" action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" value="{{product.name}}">
+                    <label for="floatingName">Name</label>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="size" id="floatingEmail" placeholder="Model" value="{{product.stock}}">
+                    <label for="floatingEmail">Stock</label>
+                  </div>
+                </div>
+
+
+
+              
+               
+                <div class="col-sm-10">
+                   
+                     <select class="form-select" name="categoryid" aria-label="Default select example">
+                        {{#if product.categoryid}}
+                        <option value="{{product.categoryid}}">{{product.categoryid}}</option>
+                        {{else}}
+                        <option value="{{product.categoryid}}">Select category</option>
+                        {{/if}}
+                        {{#each getcategory}}
+                        <option  value="{{this.name}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>  
+         
+
+
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" name="price" id="floatingPassword" placeholder="Price" value="{{product.price}}">
+                    <label for="floatingPassword">Price</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" name="color" id="floatingName" placeholder="Name" value="{{product.color}}">
+                    <label for="floatingName">colour</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" name="description" placeholder="description" name="description" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <label for="floatingTextarea">Description</label>
+                    <br>
+                  </div>
+                </div>
+                
+
+
+                <div class="row mb-3">
+                  <label for="formFile" class="col-sm-2 col-form-label">Image Upload</label>
+                  <img src="../product-pictures/{{product.image.[0]}}" alt="" style="width: 70px; height:50px" id="imgView">
+                  <div class="col-sm-10">
+                    <input class="form-control " name="image" multiple type="file" id="formFile">
+                  </div>
+                  
+                </div>
+
+
+                
+               
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+<input type="text" value="{{product.description}}" id="description" hidden>
+
+<script>
+  document.getElementById("floatingTextarea").defaultValue = document.getElementById("description").value;
+  function viewImage(event) {
+    console.log("kkkkkkkkkkkkkkkkkkkk")
+    document.getElementById(imgView).src = URL.createObjectURL(event.target.files[0])
+  }
+</script>
+
+</body>
+
+
+
+<script defer src="https://cdn.crop.guide/loader/l.js?c=PNNJBK"></script> --}}

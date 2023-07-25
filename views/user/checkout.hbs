@@ -1,0 +1,530 @@
+
+
+<style>
+#copyvalue {
+    border: none;
+    outline: none;
+}
+</style>
+
+<section class="checkout_area section_gap">
+      <div class="col-md-8">
+           
+    <div class="container">
+       
+
+        </div>
+        <div class="billing_details">
+           <div class="row">
+                <div class="col-md-8">
+                    <hr>
+                    <div class="row">
+                        {{#each coupen}}
+                        <div class="alert alert-success  col-md-5 ml-3" role="alert">
+                            <small>Apply</small> <b style="color:black;">{{this.name}} </b><small>to get flat</small><b
+                                style="color:brown"> {{this.value}}%</b> <small>Discount</small>
+                            <input id="copyvalue" type="text" readonly value="{{this.code}}" />
+                        </div>
+                        {{/each}}
+                    </div>
+        
+        
+                </div>
+                <div class="col-md-4 ml-auto">
+                    <form class="row contact_form" id="couponForm" action='' method="post" novalidate="novalidate">
+                        <div class="cupon_area">
+                            <div class="check_title">
+                                <h2>Have a coupon? <a href="/Viewoffers">Click here to see Coupons</a>
+                                </h2>
+                            </div>
+                            <input type="text" placeholder="Enter coupon code" id="couponInput">
+                            <div><span id="errorMsg" style="color: red;"></span></div>
+        
+                            <a class="tp_btn" onclick="coupon()">Apply Coupon</a>
+                    </form>
+                </div>
+                <div class="alert alert-success" id="successAlert" role="alert" hidden>
+                    This is a success alert—check it out!
+                </div>
+                <div id="failedAlert" class="alert alert-danger" role="alert" hidden>
+                    Invalid / Expired Coupon
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="billing-select mb-20">
+            <label style="padding-top: 5px; padding-left: 20px;"> <abbr class="required" title="required"></abbr>
+            </label>
+            <select onchange="updateFormFields()" placeholder="Please" id="address">
+                <option>Select Your Address</option>
+
+                {{#each address}}
+
+                <option value={{this.Address.userAddressId}}>{{this.Address.userAddressId}},{{this.Address.town}},
+                    {{this.Address.streetNumber}}, {{this.Address.pincode}} </option>
+
+                {{/each}}
+
+            </select>
+
+        </div>
+
+
+
+
+
+
+        <div style="margin-left: 650px;">
+            <a class="tp_btn" href="/userprofile">Add Address</a>
+        </div>
+        
+      
+
+
+        
+
+        <h4 style="padding-left: 300px;">Enter Delivery Address</h4>
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+
+
+
+
+
+
+
+
+                    <form class="row contact_form"  novalidate="novalidate"
+                        id="checkout-form">
+
+
+
+
+                        {{!-- <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add1" name="add1"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+                            <span class="placeholder" data-placeholder="Name"></span>
+                        </div> --}}
+
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="name" name="uname"
+                                value="{{this.user.name}}" placeholder="Name" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'name'">
+                        </div>
+
+
+                        <div class="col-md-6 form-group p_star">
+                            <input type="number" class="form-control" id="number" name="mobile"
+                                value="{{this.user.mobile}}" placeholder="Phone number"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone number'">
+                        </div>
+
+
+                        <div class="col-md-6 form-group p_star">
+                            <input type="email" class="form-control" id="email" name="email"
+                                value="{{this.user.email}}" placeholder="Email" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'name'">
+                        </div>
+
+                         {{!-- <div class="col-md-6 form-group p_star">
+                            <input type="email" class="form-control" id="address" name="address"
+                                value="{{this.user.address.[0].address}}" placeholder="address" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'name'">
+                        </div> --}}
+
+
+
+
+                        <div class="col-md-6 form-group p_star">
+                            <input type="number" class="form-control" id="home number"
+                                value="{{this.address.houseNumber}}" name="houseNumber" placeholder="Home number"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Home number'">
+                        </div>
+
+                        {{!-- <div class="col-md-6 form-group p_star">
+                            <input type="number" class="form-control" id="street number"
+                                value="{{this.address.streetNumber}}" name="streetNumber" placeholder="street number"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'street number'">
+                        </div> --}}
+
+
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="town" value="{{this.address.town}}" name="town"
+                                placeholder="Town/City" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Town'">
+                        </div>
+
+
+                        <div class="col-md-6 form-group p_star">
+                            <input type="text" class="form-control" id="state" name="state"
+                                value="{{this.address.state}}" placeholder="state" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'state'">
+                        </div>
+
+
+
+
+                        <div class="col-md-12 form-group p_star">
+                            <input type="number" class="form-control" id="zip" value="{{this.address.pincode}}"
+                                name="pincode" placeholder="Postcode/ZIP" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'zip'">
+                        </div>
+
+
+
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option5" name="payment-method" value="COD" checked>
+                                <label for="f-option5">COD</label>
+                                <div class="check"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="payment_item active">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option6" name="payment-method" value="RAZORPAY">
+                                <label for="f-option6">Razorpay </label>
+                                
+                                <div class="check"></div>
+                            </div>
+                        </div>
+                     
+ 
+                        {{!-- <div class="payment_item">
+                            <div class="radion_btn">
+                                
+                                <input type="radio" id="f-option7" name="payment-method" value="PAYPAL">
+                                <label for="f-option7">Paypal </label>
+                               
+                                <div class="check"></div>
+                            </div>
+                        </div> --}}
+
+
+                        <div class="payment_item">
+                            <div class="radion_btn">
+                                <input type="radio" id="f-option8" name="payment-method" value="WALLET">
+                                <label for="f-option8">Wallet</label>
+                                
+                                <div class="check"></div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+
+<input type="number" name="totalprice" id="totalAmounts" value="{{total}}" hidden>
+
+"
+                        <button class="primary-btn" type="submit" >Place Order</button>
+
+
+                    </form>
+
+                </div>
+
+
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <h2>Your Order</h2>
+
+                        <ul class="list">
+                            <li><a href="#">Product <span class="middle"> Quantity</span> <span class="last">Price</span>
+                                </a></li>
+                            {{#each products}}
+                            <li><a href="#">{{this.product.name}}<span class="middle">x{{this.quantity}}</span> <span
+                                        class="last">₹ {{this.product.price}}</span></a></li>
+                            {{/each}}
+                            <li><a href="#">Total <span id="totalAmount">₹ {{total}}</span></a></li>
+                        </ul>
+
+
+                        <div id="Details" hidden>
+                            <ul class="list list_2">
+
+
+                                <li><a href="#">Total Price<span id="totalPrice">₹ {{total}}</span></a></li>
+                                <li><a href="#">Discount Price <span id='discountPrice'>₹ {{total}}</span></a></li>
+                                <li><a href="#">You Saved <span id="savedPrice">₹ {{total}}</span></a></li>
+
+                            </ul>
+                        </div>
+
+
+
+
+
+                        {{!-- <a class="primary-btn" href="#">Place Order</a> --}}
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+<!--================End Checkout Area =================-->
+
+<!-- start footer Area -->
+
+<!-- End footer Area -->
+
+
+
+<script>
+$("#checkout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                   
+               
+                    if(response.Success){
+                  
+                          Swal.fire({
+        title: 'Good job!',
+        text: 'Your order is placed successfully!',
+        icon: 'success',
+        onClose: () => {
+            location.href = '/userOrderview';
+        }
+    });
+                    }else if (response.walletSuccess) {
+                            location.href = '/userOrderview'
+                        }
+                    else{
+                        console.log(">>>>>>>>>>>>>>>>>>>",response)
+                         razorpayPayment(response)
+                    }
+                    
+              
+
+
+
+            }
+        })
+    })
+
+
+
+
+
+
+
+    function razorpayPayment(order) {
+        var options = {
+            "key": "rzp_test_6TwAbY5JkBXwMZ",
+            "amount": order.amount,
+            "currency": "INR",
+            "name": "Fono",
+            "description": "Test Transaction",
+            "image": "img/fav1.png",
+            "order_id": order.id,
+            "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+
+            "handler": function (response) {
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9000090000"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+      function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                                 Swal.fire({
+        title: 'Good job!',
+        text: 'Your order is placed successfully!',
+        icon: 'success',
+        onClose: () => {
+            location.href = '/userOrderview';
+        }
+    });
+                }
+                else {
+                    alert("payment failed")
+               
+                }
+            }
+
+        })
+    }
+
+    function coupon() {
+        let coupenName = document.getElementById('couponInput').value
+        console.log(couponInput, "comeeeeee")
+        $.ajax({
+            url: '/coupen-verify',
+            data: {
+                coupon: coupenName
+            },
+            method: 'post',
+            success: (response) => {
+
+                Swal.fire(
+                    'Good job!',
+                    'Your coupon is applied!',
+                    'success'
+                ).then(()=>{
+                     if (response.verify) {
+                         document.getElementById('totalAmounts').value = response.amount
+                    document.getElementById('totalAmount').innerHTML = response.amount
+                    document.getElementById("Details").hidden = false
+                    document.getElementById('totalPrice').innerHTML = response.originalPrice
+                    document.getElementById('discountPrice').innerHTML = response.discountAmount
+                    document.getElementById('savedPrice').innerHTML = response.savedAmount
+                }
+                else {
+                    if (response.invalidDate) {
+                        document.getElementById('errorMsg').innerHTML = response.invalidDateMsg
+                        setTimeout(() => {
+                            response.invalidDateMsg = null
+                        }, 3000)
+                    }
+                    else if (response.minAmount) {
+                        document.getElementById('errorMsg').innerHTML = response.minAmountMsg
+                        setTimeout(() => {
+                            response.minAmountMsg = null
+                            location.reload()
+                        }, 3000)
+                    }
+                    else if (response.invalidCoupen) {
+                        document.getElementById('errorMsg').innerHTML = response.invalidCoupenMsg
+                        setTimeout(() => {
+                            response.invalidCoupenMsg = null
+                            location.reload()
+                        }, 3000)
+                    }
+                }
+
+                })
+
+                
+               
+            }
+        })
+    }
+    function getAddressDetails(selectedAddress){
+        $.ajax({
+            url:'/fillAddress',
+            data: {
+                addressId: selectedAddress
+            },
+             method: 'post',
+             success: (response) => {
+
+                 updateFormField(response);
+
+            }
+            
+        })
+    }
+    function updateFormFields() {
+    // Get the selected address option
+    var selectedAddress = document.getElementById("address").value;
+    console.log(selectedAddress,'oooooooooooo')
+
+    // Retrieve the corresponding address details from your data source
+    getAddressDetails(selectedAddress); // Replace with your code to fetch the address details
+    
+    // Update the form fields with the retrieved address details
+    
+}
+function updateFormField(addressDetails) {
+
+  // Update the form fields with the retrieved address details
+  document.getElementById("name").value = addressDetails.uname;
+  document.getElementById("number").value = addressDetails.number;
+  document.getElementById("email").value = addressDetails.email;
+   document.getElementById("home number").value = addressDetails.houseNumber;
+    document.getElementById("town").value = addressDetails.town;
+    document.getElementById("state").value = addressDetails.state;
+    document.getElementById("zip").value = addressDetails.pincode;
+  // Update other fields as needed
+}
+
+</script>
+
+
+
+<script>
+    function showAddresses() {
+        var addresses = {{address}}; // Replace {{address}} with your actual address data
+        
+        var addressContainer = document.getElementById("addressContainer");
+        addressContainer.innerHTML = ""; // Clear previous addresses (if any)
+        
+        if (addresses.length > 0) {
+            addresses.forEach(function(address) {
+                var addressText = address.Address.userAddressId + ", " + address.Address.town + ", " + address.Address.streetNumber + ", " + address.Address.pincode;
+                var addressElement = document.createElement("p");
+                addressElement.textContent = addressText;
+                
+                var editButton = document.createElement("button");
+                editButton.textContent = "Edit";
+                editButton.addEventListener("click", function() {
+                    // Handle edit functionality here
+                    // You can access the address details using the 'address' variable
+                    console.log("Edit clicked for address:", address);
+                });
+                
+                addressElement.appendChild(editButton);
+                addressContainer.appendChild(addressElement);
+            });
+        } else {
+            addressContainer.textContent = "No addresses found.";
+        }
+    }
+</script>
+
+
+
+
+
+</body>
+
+</html>

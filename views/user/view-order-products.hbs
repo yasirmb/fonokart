@@ -1,0 +1,269 @@
+<section>
+  <div class="container" style="padding-top: 150px;">
+    {{#each orderProducts}}
+    <div class="card shadow-0 border mb-4">
+      <div class="card-body">
+        <div class="col-md-12 text-right">
+          {{#isEqual this.status 'Delivered'}}
+          <button id="return-order" onclick="returnOrder('{{this._id}}')" class="btn btn-danger">Return</button>
+          {{/isEqual}}
+          {{#isEqual this.status 'Shipped'}}
+          <!-- Add your code here for 'Shipped' status -->
+          {{/isEqual}}
+          {{#isEqual this.status 'placed'}}
+          <button id="remove-order" onclick="changeStatus('{{this._id}}')" class="btn btn-danger">cancel order</button>
+          {{/isEqual}}
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <img src="/product-pictures/{{this.product.image.[0]}}" class="img-fluid" alt="Phone">
+          </div>
+          <div class="row">
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0">Name: {{this.product.name}}</p>
+            </div>
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">Category: {{this.product.categoryid}}</p>
+            </div>
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">₹ {{this.product.price}}</p>
+            </div>
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">Description: {{this.product.description}}</p>
+            </div>
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">Qty: {{this.quantity}}</p>
+            </div>
+            <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">Discount: {{this.product.discount}}</p>
+            </div>
+            <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+              <p class="text-muted mb-0 small">Color: {{this.product.color}}</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+        <!-- Move the "Track Order" section here -->
+        <div class="row d-flex align-items-center">
+          <div class="col-md-2">
+            <p class="text-muted mb-0 small">Track Order</p>
+          </div>
+          <div class="col-md-10">
+            <div class="progress" style="height: 6px; border-radius: 16px;">
+              <div class="progress-bar" role="progressbar"
+                style="width: 65%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+            <div class="d-flex justify-content-around mb-1">
+              <p class="" id="order-status" style="color: rgb(253, 8, 8);">{{this.status}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</section>
+
+<div class="product__pagination mt-5">
+  {{#each pageCount}}
+  <button class="btn btn-secondary rounded"><a href="/myorder?id={{this}}" class="text-white">{{this}}</a></button>
+  {{/each}}
+  <!-- Add your code for pagination -->
+</div>
+
+
+
+
+<script>
+   
+
+  async function changeStatus(ordId) {
+    console.log(ordId , "ordid")
+    var reason
+    
+
+
+    await (async () => {
+
+      /* inputOptions can be an object or Promise */
+      const inputOptions = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            'I Changed My Mind': 'I Changed My Mind',
+            'High Shipping Cost': 'High Shipping Cost',
+            'I Bought The Wrong Item(s)': 'I Bought The Wrong Item(s)',
+            'I Found A Cheper Alternative': 'I Found A Cheper Alternative',
+            'I Placed A Duplicate Order': 'I Placed A Duplicate Order',
+            'Delivery Takes Too Long': 'Delivery Takes Too Long',
+            'Other': 'Other'
+          })
+        }, 1000)
+      })
+
+      const { value: color } = await Swal.fire({
+        title: 'Choose The Reason.',
+        input: 'radio',
+        inputOptions: inputOptions,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'You need to choose something!'
+          }
+        }
+      })
+
+      if (color) {
+        reason = color
+        console.log(color);
+        // Swal.fire({ html: `You selected: ${color}` })
+        (async () => {
+          const { value: text } = await Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your Order Is Cancelled Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          if (text) {
+            console.log(text);
+          }
+        })();
+
+
+        $.ajax({
+          url: `/placedordercancel/${ordId}`,
+          method: 'POST',
+          data: {
+            reason: reason
+          },
+          success: (response) => {
+            location.reload()
+
+            console.log("response")
+          }
+        })
+
+      }
+
+    })()
+
+
+  }
+
+
+
+
+
+
+
+
+
+  async function returnOrder(ordId) {
+    console.log(ordId , "ordid")
+    var returnReason
+
+
+    await (async () => {
+
+      /* inputOptions can be an object or Promise */
+      const inputOptions = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            'I Changed My Mind': 'I Changed My Mind',
+            'High Shipping Cost': 'High Shipping Cost',
+            'I Bought The Wrong Item(s)': 'I Bought The Wrong Item(s)',
+            'I Found A Cheper Alternative': 'I Found A Cheper Alternative',
+            'I Placed A Duplicate Order': 'I Placed A Duplicate Order',
+            'Delivery Takes Too Long': 'Delivery Takes Too Long',
+            'Other': 'Other'
+          })
+        }, 1000)
+      })
+
+      const { value: color } = await Swal.fire({
+        title: 'Choose The Reason For Return Product.',
+        input: 'radio',
+        inputOptions: inputOptions,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'You need to choose something!'
+          }
+        }
+      })
+
+      if (color) {
+        returnReason = color
+        console.log(color);
+        // Swal.fire({ html: `You selected: ${color}` })
+        (async () => {
+          const { value: text } = await Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your Order Is returned Successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          if (text) {
+            console.log(text);
+          }
+        })();
+
+
+        $.ajax({
+          url: `/returnorder/${ordId}`,
+          method: 'POST',
+          data: {
+            returnReason: returnReason
+          },
+          success: (response) => {
+            location.reload()
+
+            console.log("response")
+          }
+        })
+
+      }
+
+    })()
+
+
+  }
+
+
+
+
+</script>
+
+
+<style>
+  body {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+.swal2-radio {
+  display: grid !important;
+  text-align: left !important;
+  gap: 10px;
+}
+.swal2-radio label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.swal2-radio input[type="radio"] {
+  margin-right: 5px;
+  margin-top: 0;
+  height: 18px;
+  width: 18px;
+  flex-shrink: 0;
+}
+.swal2-radio input[type="radio"]:checked::before {
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+}
+</style>

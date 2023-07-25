@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address List</title>
+    <style>
+        table {
+            width: 89%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 6px 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Housenumber</th>
+                <th>Streetnumber</th>
+                <th>Town</th>
+                <th>State</th>
+                <th>Pincode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each address}}
+            <tr>
+                <td>{{this.Address.userAddressId}}</td>
+                <td>{{this.Address.uname}}</td>
+                <td>{{this.Address.email}}</td>
+                <td>{{this.Address.number}}</td>
+                <td>{{this.Address.houseNumber}}</td>
+                <td>{{this.Address.streetNumber}}</td>
+                <td>{{this.Address.town}}</td>
+                <td>{{this.Address.state}}</td>
+                <td>{{this.Address.pincode}}</td>
+                <td>
+                    <button onclick="location.href='/editaddress/{{this.Address.userAddressId}}'">Edit</button>
+                    <button onclick="location.href='/deleteaddress/{{this.Address.userAddressId}}'" class="deleteButton">Delete</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script>
+        // Attach event listener to the delete buttons in the table
+        const deleteButtons = document.querySelectorAll('.deleteButton');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Get the corresponding address information from the table row
+                const row = button.parentNode.parentNode;
+                const uname = row.cells[0].textContent;
+                const email = row.cells[1].textContent;
+                const address = row.cells[2].textContent;
+                const number = row.cells[3].textContent;
+                const houseNumber = parseInt(row.cells[4].textContent);
+                const streetNumber = parseInt(row.cells[5].textContent);
+                const state = parseInt(row.cells[6].textContent);
+                const pincode = parseInt(row.cells[7].textContent);
+
+                // Call a function to delete the address from MongoDB
+                deleteAddress(uname, email, address, number, houseNumber, streetNumber, state, pincode);
+            });
+        });
+
+        // Function to delete an address from MongoDB
+        async function deleteAddress(uname, email, address, number, houseNumber, streetNumber, state, pincode) {
+            try {
+                // Make a request to delete the address from the server using AJAX or fetch API
+                const response = await fetch('/api/deleteAddress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ uname, email, address, number, houseNumber, streetNumber, state, pincode })
+                });
+
+                if (response.ok) {
+                    console.log('Address deleted successfully');
+                    // Optionally, remove the row from the table or update the table contents
+                } else {
+                    console.error('Error deleting address');
+                    // Handle error and display an error message if needed
+                }
+            } catch (error) {
+                console.error('Error deleting address:', error);
+                // Handle error and display an error message if needed
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+{{!-- 
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Number</th>
+            <th>Housenumber</th>
+            <th>Streetnumber</th>
+            <th>Town</th>
+            <th>State</th>
+            <th>Pincode</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each address}}
+        <tr>
+            <td>{{this.Address.userAddressId}}</td>
+            <td>{{this.Address.uname}}</td>
+            <td>{{this.Address.email}}</td>
+            <td>{{this.Address.number}}</td>
+            <td>{{this.Address.houseNumber}}</td>
+            <td>{{this.Address.streetNumber}}</td>
+            <td>{{this.Address.town}}</td>
+            <td>{{this.Address.state}}</td>
+            <td>{{this.Address.pincode}}</td>
+            <td>
+         <button onclick="location.href='/editaddress/{{this.Address.userAddressId}}'">Edit</button>
+
+        <button onclick="deleteAddress('{{this.Address.userAddressId}}')">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script>
+    function redirectToEditAddress() {
+    window.location.href = "/editaddress";
+
+
+    }
+
+  // Attach event listener to the delete buttons in the table
+const { MongoClient } = require('mongodb');
+
+// MongoDB connection string
+const uri = 'mongodb://127.0.0.1:27017';
+// Database name
+const dbName = 'fono';
+
+// Function to delete an address from MongoDB
+async function deleteAddress(uname, email, address, number, houseNumber, streetNumber, state, pincode) {
+  try {
+    // Create a new MongoClient
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    // Connect to the MongoDB server
+    await client.connect();
+
+    // Select the database
+    const db = client.db(dbName);
+
+    // Delete the address from the "user.addresses" collection
+    await db.collection('user').updateOne(
+      { uname, email },
+      { $pull: { 'addresses': { address, number, houseNumber, streetNumber, state, pincode } } }
+    );
+
+    // Handle success and update the table if needed
+    console.log('Address deleted successfully');
+    // Optionally, remove the row from the table or update the table contents
+
+    // Close the MongoDB connection
+    await client.close();
+  } catch (error) {
+    console.error('Error deleting address:', error);
+    // Handle error and display an error message if needed
+  }
+}
+
+// Attach event listener to the delete buttons in the table
+const deleteButtons = document.querySelectorAll('.deleteButton');
+deleteButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Get the corresponding address information from the table row
+    const row = button.parentNode.parentNode;
+    const uname = row.cells[0].textContent;
+    const email = row.cells[1].textContent;
+    const address = row.cells[2].textContent;
+    const number = row.cells[3].textContent;
+    const houseNumber = parseInt(row.cells[4].textContent);
+    const streetNumber = parseInt(row.cells[5].textContent);
+    const state = parseInt(row.cells[6].textContent);
+    const pincode = parseInt(row.cells[7].textContent);
+
+    // Call a function to delete the address from MongoDB
+    deleteAddress(uname, email, address, number, houseNumber, streetNumber, state, pincode);
+  });
+});
+
+
+
+       function viewAddress() {
+    // Get the selected address option
+    var selectedAddress = document.getElementById("address").value;
+    console.log(selectedAddress,'oooooooooooo')
+       }
+</script>
+<style>
+    table {
+        width: 89%;
+        border-collapse: collapse;
+         margin: 0 auto;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    button {
+        padding: 6px 12px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style> --}}

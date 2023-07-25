@@ -1,0 +1,154 @@
+<body>
+
+  <!-- ======= Header ======= -->
+
+
+  <!-- ======= Sidebar ======= -->
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Add Product Form</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Elements</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+
+              <!-- General Form Elements -->
+              <form action="/admin/addProductSubmit" method="post" enctype="multipart/form-data">
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="name">
+                  </div>
+                </div>
+
+                {{!-- <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Size</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="size">
+                  </div>
+                </div> --}}
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">colour</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="color">
+                  </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Price</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="price">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" style="height: 100px" name="description"></textarea>
+                  </div>
+                </div>
+              
+
+
+
+                {{!-- <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label" onsubmit="return validateForm()">Image Upload
+                    1 </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="productImage1" name="productImage1">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Image Upload 2 </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="productImage2" name="productImage2">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Image Upload 3 </label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="productImage3" name="productImage3">
+                  </div>
+                </div> --}}
+
+               
+
+                  <div class="row mb-3">
+                    <label for="formFile" class="col-sm-2 col-form-label">Image Upload</label>
+                    <div class="col-sm-10">
+                      <input class="form-control " name="image" multiple type="file" id="formFile">
+                    </div>
+                    
+                  </div>
+
+
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Category</label>
+                  <div class="col-sm-10">
+
+                    <select class="form-select" name="categoryid" aria-label="Default select example">
+                      <option selected>Select category</option>
+                      {{#each category}}
+                      <option value="{{this.name}}">{{this.name}}</option>
+                      {{/each}}
+
+
+
+                    </select>
+                  </div>
+                </div>
+
+
+
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Submit Button</label>
+                  <div class="col-sm-10">
+                    <button type="Submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+
+
+
+</body>
+
+
+<script defer src="https://cdn.crop.guide/loader/l.js?c=PNNJBK"></script>

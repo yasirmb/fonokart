@@ -1,0 +1,350 @@
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+ <style>
+    /* Optional styling for the button */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+
+<body>
+
+  <!-- ======= Header ======= -->
+
+
+  <!-- ======= Sidebar ======= -->
+
+
+  <main id="main" class="main ml-5 mr-5 mt-4 mb-4 ">
+
+    <div class="pagetitle ml-5 mr-5">
+      <h1>Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile ml-5 mr-5">
+      <div class="row">
+        <div class="col-xl-4">
+
+        
+
+          <div class="card">
+            {{!-- <form id="image-upload-form" method="POST" action="/upload" enctype="multipart/form-data"> --}}
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+               
+              {{!-- <img id="profile-image" src="../product-pictures/{{usere.imageuser}}"
+                alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"> --}}
+              <div class="pt-2">
+               {{!-- <input type="file" name="image" id="image-upload" style="display: none;"> --}}
+                {{!-- <button  id="upload-button" class="btn btn-primary btn-sm"
+                title="Upload new profile image"><i class="bi bi-upload"></i></button> --}}
+                {{!-- <label for="image-upload" class="button">Change Image</label>
+                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i --}}
+                    {{!-- class="bi bi-trash"></i></a> --}}
+              </div>
+                
+              <h3 class="my-3" style="color: orangered;">{{usere.name}}</h3>
+              <p class="text-muted mb-1">{{usere.email}}</p>
+              <p class="text-muted mb-4">{{usere.mobile}}</p>
+              {{!-- <button type="submit" class="button">Save Image</button> --}}
+            
+            </div>
+             </form>
+          </div>
+            
+
+          {{!-- <div>
+            <h2>Profile Image</h2>
+            <form id="image-upload-form" method="POST" action="/upload" enctype="multipart/form-data">
+              <img id="profile-image" src="default-profile-image.jpg" alt="Profile Image" width="200" height="200">
+              <br>
+              <input type="file" name="image" id="image-upload" style="display: none;">
+              <label for="image-upload" class="button">Change Image</label>
+              <br>
+              <button type="submit" class="button">Save Image</button>
+            </form>
+          </div> --}}
+
+
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Add
+                    address</button>
+                </li>
+
+                {{!-- <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+                </li> --}}
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change
+                    Password</button>
+                </li>
+
+              </ul>
+
+
+              <div class="tab-content pt-2">
+
+
+
+                {{!---------------------------- ADD ADDRESS -----------------------------}}
+
+                <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
+
+                  <form action="/submit" method="post">
+
+
+
+
+
+                    <div class="row mb-3">
+                      <label for="uname" class="col-md-4 col-lg-3 col-form-label">Name</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="uname" type="text" class="form-control" id="uname" placeholder="Name"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="email"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="number" type="number" class="form-control" id="phone" placeholder="number"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'number'" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="houseNumber" class="col-md-4 col-lg-3 col-form-label">House Number</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="houseNumber" type="number" class="form-control" id="houseNumber"
+                          placeholder="house Number" onfocus="this.placeholder = ''"
+                          onblur="this.placeholder = 'house Number'" required>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3">
+                      <label for="streetNumber" class="col-md-4 col-lg-3 col-form-label">Street Number</label>
+                      <div class="col-md-8 col-lg-9">
+
+                        <input type="text" name="userId" id="" value="{{userId}}" hidden>
+
+                        <input name="streetNumber" type="number" class="form-control" id="streetNumber"
+                          placeholder="street Number" onfocus="this.placeholder = ''"
+                          onblur="this.placeholder = 'street Number'" required>
+                      </div>
+                    </div>
+
+
+
+                    <div class="row mb-3">
+                      <label for="town" class="col-md-4 col-lg-3 col-form-label">Town/City</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="town" type="text" class="form-control" id="town" placeholder="town"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'town'" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="state" class="col-md-4 col-lg-3 col-form-label">State</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="state" type="text" class="form-control" id="state" placeholder="state"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'state'" required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="pincode" class="col-md-4 col-lg-3 col-form-label">Pincode</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="pincode" type="number" class="form-control" id="pincode" placeholder="pincode"
+                          onfocus="this.placeholder = ''" onblur="this.placeholder = 'pincode'" required>
+                      </div>
+                    </div>
+
+
+
+                    <div class="text-center">
+                      <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+                     
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                      data-mdb-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                      {{#if passChangeSuccess}}
+                      <div class="alert alert-success" role="alert">
+
+                        <script>
+                          swal(" Password Changed Successfully!", "You can login using new Password!",
+                            "success").then(function () {
+                              // Redirect to the login page
+                              window.location.href = '/login';
+                            });
+                        </script>
+
+                      </div>
+                      {{else if passChangeFail}}
+                      <div class="alert alert-danger" role="alert">
+
+                        <script>
+                          swal(" Password cannot be matched!", "Please Check Your Password and Try Again",
+                            "error")
+                        </script>
+
+
+                      </div>
+                      {{else}}
+                      <h3>Change Password</h3>
+                      {{/if}}
+                    </button>
+                  </h2>
+                  <!-- Change Password Form -->
+                  <form action="/change-password" method="post">
+
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input type="password" name="email" value="{{usere.email}}" hidden />
+                        <input name="currentPassword" type="password" class="form-control" id="currentPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newPassword" type="password" class="form-control" id="newPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="confirmPassword" type="password" class="form-control" id="renewPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <!-- End Footer -->
+
+
+
+</body>
+
+{{!-- <script>
+  // Get references to the elements
+  var profileImage = document.getElementById('profile-image');
+  var uploadButton = document.getElementById('upload-button');
+  var fileInput = document.getElementById('file-input');
+
+  // Add event listener to the upload button
+  uploadButton.addEventListener('click', function (event) {
+    // Prevent the default behavior of the button (e.g., navigating to another page)
+    event.preventDefault();
+
+    // Trigger a click event on the file input element
+    fileInput.click();
+  });
+
+  // Handle the selected file when the user has made a selection
+  fileInput.addEventListener('change', function () {
+    var selectedFiles = fileInput.files;
+
+    // Check if any file was selected
+    if (selectedFiles.length > 0) {
+      var reader = new FileReader();
+
+      // Read the selected file as a data URL
+      reader.readAsDataURL(selectedFiles[0]);
+
+      // Handle the file loading event
+      reader.onload = function (event) {
+        // Update the profile image source with the loaded data URL
+        profileImage.src = event.target.result;
+      };
+    }
+
+  });
+</script> --}}
+
+
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.umd.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</html>

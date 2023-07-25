@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <script src="/javascripts/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <div class="container mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-12">
+                    <div class="sidebar">
+                        <div class="product-widget">
+                            <br>
+                            <ul class="product-categories">
+                                <ul class="nav nav-tabs justify-content-center mb-55" id="myTab" role="tablist">
+                                    {{#each getcategory}}
+                                    <form method="POST" action="/filter-product">
+                                        <li class="nav-item" role="presentation">
+                                            <input type="hidden" name="name" value="{{this.name}}">
+                                            <button class="btn btn-light" id="profile-tab" type="submit" role="tab" aria-selected="true" style="color: #ff6f00;">{{this.name}}</button>
+                                        </li>
+                                    </form>
+                                    {{/each}}
+                                </ul>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="section-title">
+                            {{#if products}}
+                            <h1 style="font-size: 24px; color: #333; margin-left:180px;">{{products.[0].categoryid}}</h1>
+                            {{else}}
+                            <h1 class="text-center mt-5 mb-5" style="font-size: 28px; color: #ff0000;">No Items In Cart</h1>
+                            <h6 class="text-center mt-3 mb-4"><a href="/" class="text-body" style="color: #0000ff;"><i class="fas fa-long-arrow-alt-left mr-2"></i>Back to shop</a></h6>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {{#each products}}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <div class="position-relative">
+                                <a href="/product-detail?id={{this._id}}">
+                                    {{#if this.offerPrice}}
+                                    <div class="ml-2"><button class="btn btn-warning position-absolute pt-4">Offer</button></div>
+                                    {{/if}}
+                                    <img class="img-fluid" src="/product-pictures/{{this.image.[0]}}" alt="" style="margin-top: 40px;">
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <h3>{{this.name}}</h3>
+                                <h6>{{this.description}}</h6>
+                                <h5>Stock: {{this.stock}}</h5>
+                                <h5>Color: {{this.color}}</h5>
+                                <p class="p-absoulute pr-1">
+                                    <span></span> 
+                                    {{#if this.offerPrice}}
+                                    <del>₹{{this.price}}</del>
+                                    ₹{{this.offerPrice}}
+                                    {{else}}
+                                    ₹{{this.price}}
+                                    {{/if}}
+                                    <span></span>
+                                </p>
+                                <div class="prd-bottom">
+                                    {{#if this.stock }}
+                                    <a class="social-info" href="/add-to-cart/{{this._id}}">
+                                        <span class="ti-bag"></span>
+                                        <p class="hover-text">Add To Cart</p>
+                                    </a>
+                                    {{else}}
+                                    <h6 class="hover-text" style="color: #ff6f00;">Out of stock</h6>
+                                    {{/if}}
+                                    <a href="/add-to-wishlist/{{this._id}}" class="social-info">
+                                        {{#if this.isWishlisted}}
+                                        <span class="fas fa-heart" style="font-size:14px; color:#ff6f00;"></span>
+                                        {{else}}
+                                        <span class="lnr lnr-heart"></span>
+                                        {{/if}}
+                                        <p class="hover-text">Wishlist</p>
+                                    </a>
+                                    <a href="" class="social-info">
+                                        <form action="/click" method="post">
+                                            <input type="text" name="id" value="{{this._id}}" hidden>
+                                            <span class="lnr lnr-move"></span>
+                                            <button type="submit" class="hover-text" style="border: none; background:transparent ">View more</button>
+                                        </form>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+{{!-- 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   
+</head>
+<body>
+    <script src="/javascripts/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <div class="container mt-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-12">
+                    <div class="sidebar">
+                        <div class="product-widget">
+                            <h5 style="color: #ff6f00" class="widget-title mb-30">Product Price Filter</h5>
+                            <form action="/priceFilter" method="post">
+                                <label for="min-price">Min price:</label><br>
+                                <input type="number" id="min-price" min="0" value="0" name="minprice"><br>
+                                <label for="max-price">Max price:</label><br>
+                                <input type="number" id="max-price" min="0" value="100" name="maxprice"><br>
+                                <button style="color: #ff6f00" type="submit" class="btn btn-light mt-3">Filter</button>
+                            </form>
+                            <br>
+                            <ul class="product-categories">
+                                <ul class="nav nav-tabs justify-content-center mb-55" id="myTab" role="tablist">
+                                    {{#each getcategory}}
+                                    <form method="POST" action="/filter-product">
+                                        <li class="nav-item" role="presentation">
+                                            <input type="hidden" name="name" value="{{this.name}}">
+                                            <button class="btn btn-light" id="profile-tab" type="submit" role="tab" aria-selected="true" style="color: #ff6f00;">{{this.name}}</button>
+                                        </li>
+                                    </form>
+                                    {{/each}}
+                                </ul>
+                            </ul>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+    <div class="col-lg-6 text-center">
+        <div class="section-title">
+            {{#if products}}
+            <h1 style="font-size: 24px; color: #333;margin-left:180px;">{{products.[0].categoryid}}</h1>
+            {{else}}
+            <h1 class="text-center mt-5 mb-5" style="font-size: 28px; color: #ff0000;">No Items In Cart</h1>
+            <h6 class="text-center mt-3 mb-4"><a href="/" class="text-body" style="color: #0000ff;"><i class="fas fa-long-arrow-alt-left mr-2"></i>Back to shop</a></h6>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+                <div class="row">
+                    {{#each products}}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <div class="position-relative">
+                                <a href="/product-detail?id={{this._id}}">
+                                    {{#if this.offerPrice}}
+                                    <div class="ml-2"><button class="btn btn-warning position-absolute pt-4">Offer</button></div>
+                                    {{/if}}
+                                    <img class="img-fluid" src="/product-pictures/{{this.image.[0]}}" alt="" style="margin-top: 40px;">
+
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <h3>{{this.name}}</h3>
+                                <h6>{{this.description}}</h6>
+                                <h5>size:{{this.size}}</h5>
+                                <h5>color:{{this.color}}</h5>
+                                <p class="p-absoulute pr-1"><span></span> 
+                                    {{#if this.offerPrice}}
+                                    <del> ₹{{this.price}}</del>
+                                    ₹{{this.offerPrice}}
+                                    {{else}}
+                                    ₹{{this.price}}
+                                    {{/if}}
+                                    <span></span>
+                                </p>
+                                <div class="prd-bottom">
+                                    {{#if this.stock }}
+                                    <a class="social-info" href="/add-to-cart/{{this._id}}">
+                                        <span class="ti-bag"></span>
+                                        <p class="hover-text">Add To Cart</p>
+                                    </a>
+                                    {{else}}
+                                    <h6 class="hover-text" style="color: #ff6f00;">out of stock</h6>
+                                    {{/if}}
+                                    <a href="/add-to-wishlist/{{this._id}}" class="social-info">
+                                        {{#if this.isWishlisted}}
+                                        <span class="fas fa-heart" style="font-size:14px; color:#ff6f00;"></span>
+                                        {{else}}
+                                        <span class="lnr lnr-heart"></span>
+                                        {{/if}}
+                                        <p class="hover-text">Wishlist</p>
+                                    </a>
+                                    <a href="" class="social-info">
+                                        <form action="/click" method="post">
+                                            <input type="text" name="id" value="{{this._id}}" hidden>
+                                            <span class="lnr lnr-move"></span>
+                                            <button type="submit" class="hover-text" style="border: none; background:transparent ">View more</button>
+                                        </form>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> --}}

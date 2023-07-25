@@ -1,0 +1,88 @@
+
+{{#if products}}
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                
+                    <td>
+                        <div class="pt-5">
+                        <h6 class="mb-0"><a href="/" class="text-body"><i class="fas fa-long-arrow-alt-left mr-2"></i>Back
+                                to shop</a></h6>
+                    </div>
+                    </td>
+                        
+                    
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">WISH LIST</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    {{#each products}}
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                    
+                                        <img src="/product-pictures/{{this.product.image.[0]}}" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                    
+                                    </div>
+                                    <div class="media-body">
+                                        <h6>{{this.product.name}}</h6>
+                                        <p>{{this.product.description}}</p>
+                                        <h5>₹{{this.product.price}}</h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="media-body">
+                                   
+                                    <a href="/add-to-cart/{{this.product._id}}" class="btn btn-primary">Add to cart</a>
+                                </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                <button onclick="deleteFromWishlist('{{this._id}}','{{this.product._id}}')" class="btn btn-danger">Remove from wishlist</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{{else}}
+ <h3 class="text-center mt-5 mb-5">No Items In WISHLIST</h3>
+        <h6 class="text-center mt-3 mb-4"><a href="/" class="text-body"><i class="fas fa-long-arrow-alt-left mr-2"></i>Back
+                                to shop</a></h6>
+{{/if}}
+<!--================End Cart Area =================-->
+
+<script>
+    function deleteFromWishlist(wishlistID,productID){
+    console.log("button clicked")
+     $.ajax({
+       url:'/delete-from-wishlist',
+        data:{
+          wishlist:wishlistID,
+          product:productID,
+        },
+       method:'post',
+        success:(result)=>{
+          if(result.status){
+          location.reload()
+          }
+        }
+       
+    })
+  }
+</script>

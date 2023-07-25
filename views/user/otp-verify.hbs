@@ -1,0 +1,146 @@
+<style>
+	#countdown {
+		font-size: 2em;
+		font-weight: bold;
+	}
+</style>
+
+<section class="login_box_area section_gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="login_box_img">
+					<img class="img-fluid" src="img/login2 (2).png" alt="">
+					<div class="hover">
+						<h4>New to our website?</h4>
+						<p>There are advances being made in science and technology everyday, and a good example of this
+							is the</p>
+						<a class="primary-btn" href="/registration">Create an Account</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="login_form_inner">
+{{!-- 
+					{{#if loginErr}}
+					<h6 style="color:red;">Invalid Credentials!</h6>
+					{{/if}}
+					<h6 id="err" style="color:red;"></h6>
+					<p id="err" style="color:red;">{{numberError}}</p> --}}
+
+					{{!-- =====================================L O G I N F O R M ============================== --}}
+
+
+					<h4 style="color: #ff6f00;">Enter the Otp</h4>
+					
+					{{#if loginErr}}
+					<h6 style="color:red;">Invalid Credentials!</h6>
+					{{/if}}
+					<h6 id="err" style="color:red;"></h6>
+					<p id="err" style="color:red;">{{numberError}}</p>
+
+
+
+					<form action="/otp-Submit" method="post">
+						<div class="container col-md-8 height-100 d-flex justify-content-center align-items-center">
+							<div class="position-relative">
+								<div class="card p-2 text-center">
+									<div>
+										<div id="otp" class="inputs d-flex flex-row justify-content-center mt-2 mb-2">
+	<input type="hidden" name="mobile" class="form-control" value="{{number}}">
+											<input class="m-2 text-center form-control rounded" type="text" id="first"
+												name="digit1" maxlength="1" />
+											<input class="m-2 text-center form-control rounded" type="text" id="second"
+												name="digit2" maxlength="1" />
+											<input class="m-2 text-center form-control rounded" type="text" id="third"
+												name="digit3" maxlength="1" />
+											<input class="m-2 text-center form-control rounded" type="text" id="fourth"
+												name="digit4" maxlength="1" />
+											<input class="m-2 text-center form-control rounded" type="text" id="fifth"
+												name="digit5" maxlength="1" />
+											<input class="m-2 text-center form-control rounded" type="text" id="sixth"
+												name="digit6" maxlength="1" />
+										</div>
+										<h6 id="err" style="color:red;">{{otpErr}}</h6>
+										<div class="mt-3 mb-3">
+											<button type="submit"
+												class="btn primary-btn px-4 validate">Validate</button>
+										</div>
+
+									</div>
+					</form>
+					<div class="card-2">
+						<div class="content d-flex justify-content-center align-items-center">
+
+							<span>Didn't get the code?</span>
+							<form action="/send-otp" method="post">
+								<input type="hidden" name="mobile" class="form-control" value="{{number}}">
+								<button id="myBtn" type="submit" class="btn u btn-light ml-3" disabled>Resend OTP
+									in</button>
+							</form>
+							<p class="btn btn-link mt-3" id="myTimer"></p>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+		{{!-- ==================================================================================== --}}
+
+
+	</div>
+	</div>
+	</div>
+	</div>
+</section>
+<!--================End Login Box Area =================-->
+
+
+<script>
+
+	
+
+	var sec = 30;
+	var myTimer = document.getElementById('myTimer');
+	var myBtn = document.getElementById('myBtn');
+	window.onload = countDown;
+	function countDown() {
+		if (sec < 10) {
+			myTimer.innerHTML = "0	" + sec;
+		} else {
+			myTimer.innerHTML = sec;
+		}
+		if (sec <= 1) {
+			$("#myBtn").removeAttr("disabled");
+			$("#myBtn").removeClass().addClass("ml-2 btn btn-link btn-light");
+			$("#myTimer").fadeTo(500, 0);
+			myBtn.innerHTML = "RESEND";
+			return;
+		}
+		sec -= 1;
+		window.setTimeout(countDown, 1000);
+	}
+
+	document.addEventListener("DOMContentLoaded", function (event) {
+		function OTPInput() {
+			const inputs = document.querySelectorAll('#otp > *[id]');
+			for (let i = 0; i < inputs.length; i++) {
+				inputs[i].addEventListener('keydown', function (event) {
+					if (event.key === "Backspace") {
+						inputs[i].value = '';
+						if (i !== 0) inputs[i - 1].focus();
+					} else {
+						if (i === inputs.length - 1 && inputs[i].value !== '') {
+							return true;
+						} else if (event.keyCode > 47 && event.keyCode < 58) { inputs[i].value = event.key; if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode > 64 && event.keyCode < 91) { inputs[i].value = String.fromCharCode(event.keyCode); if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); }
+					}
+				});
+			}
+		} OTPInput();
+	});
+</script>

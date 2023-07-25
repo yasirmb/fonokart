@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Include necessary CSS and JS libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3/dist/apexcharts.min.css">
+  <style>
+    /* Add custom CSS styles here */
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .main {
+      padding: 20px;
+    }
+
+    .pagetitle {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+     .download-button button {
+      margin-top: -200px;
+    }
+
+    .breadcrumb {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .breadcrumb-item {
+      display: inline-block;
+    }
+
+    .breadcrumb-item:not(:first-child)::before {
+      content: " > ";
+    }
+
+    .section.dashboard .row {
+      margin: 0;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .date-picker-container {
+      margin-bottom: 20px;
+    }
+
+    #chartContainer {
+      position: relative;
+    }
+
+    #barChart {
+      height: 350px;
+    }
+
+    .download-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Main section -->
+  <main id="main" class="main">
+    <!-- Page Title and Breadcrumb -->
+    <h1 class="pagetitle">Sales Dashboard</h1>
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">Home</li>
+      <li class="breadcrumb-item">Dashboard</li>
+      <li class="breadcrumb-item">Sales</li>
+    </ul>
+
+    <section class="section dashboard">
+      <div class="row">
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- ... (other card elements) ... -->
+
+            <!-- Daily Sales Bar Chart with Date Picker -->
+            <div class="col-xxl-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Sales</h5>
+
+                  <!-- Date Picker -->
+                  <div class="date-picker-container">
+                    <label for="datePicker">Select Date:</label>
+                    <input type="date" id="datePicker" onchange="updateBarChart()" />
+                  </div>
+
+                  <!-- Chart Container -->
+                  <div id="chartContainer">
+                    <!-- Bar Chart -->
+                    <div id="barChart"></div>
+
+                    <!-- Download Daily Sales Report button -->
+                    <div class="download-button">
+                      <button type="button" class="btn btn-success" onclick="downloadDailySalesReport()">Download</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ... (other card elements) ... -->
+
+          </div>
+        </div>
+        <!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- ... (other card elements) ... -->
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Include necessary JS libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3/dist/apexcharts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script>
+    // Sample data for daily sales (replace with actual data)
+    const dailySalesData = [
+      { _id: '2023-07-10', total: 100 },
+      { _id: '2023-07-11', total: 150 },
+      { _id: '2023-07-12', total: 200 },
+      { _id: '2023-07-13', total: 50 },
+      { _id: '2023-07-14', total: 300 },
+      { _id: '2023-07-15', total: 250 },
+      { _id: '2023-07-16', total: 120 },
+    ];
+
+    let barChart;
+
+    function updateBarChart() {
+      const datePicker = document.getElementById("datePicker");
+      const selectedDate = datePicker.value;
+
+      // Find the data point based on the selected date
+      const selectedData = dailySalesData.find(data => data._id === selectedDate);
+
+      const salesAmount = selectedData ? selectedData.total : 0;
+
+      const barChartOptions = {
+        series: [{
+          name: 'Daily Sales',
+          data: [salesAmount],
+        }],
+        chart: {
+          height: 350,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            endingShape: 'rounded',
+            columnWidth: '55%',
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        xaxis: {
+          categories: [selectedDate],
+        },
+      };
+
+      // If the chart is already initialized, update the series and categories
+      if (barChart) {
+        barChart.updateSeries([{
+          name: 'Daily Sales',
+          data: [salesAmount],
+        }]);
+
+        barChart.updateOptions({
+          xaxis: {
+            categories: [selectedDate],
+          },
+        });
+      } else {
+        // Create the bar chart for the first time
+        barChart = new ApexCharts(document.querySelector("#barChart"), barChartOptions);
+        barChart.render();
+      }
+    }
+
+    // Initial rendering with today's date data
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById("datePicker").value = today;
+    updateBarChart();
+
+    // Function to download the daily sales report as PDF
+    function downloadDailySalesReport() {
+      const cardBody = document.querySelector(".card-body");
+      const barChartElement = document.getElementById("barChart");
+
+      const opt = {
+        margin: 10,
+        filename: 'daily_sales_report.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 1 },
+        jsPDF: { unit: 'mm', orientation: 'landscape' }
+      };
+
+      // Create a new div element for the PDF content
+      const pdfContent = document.createElement('div');
+
+      // Append the bar chart to the PDF content
+      pdfContent.appendChild(barChartElement.cloneNode(true));
+
+      // Generate and save the PDF
+      html2pdf().set(opt)
+        .from(pdfContent)
+        .save();
+    }
+  </script>
+</body>
+
+</html>
