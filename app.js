@@ -1,20 +1,20 @@
-let createError = require("http-errors");
-let express = require("express");
+const createError = require("http-errors");
+const express = require("express");
 
 const path = require("path");
-let cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
-let logger = require("morgan");
-let hbs = require("express-handlebars");
-let multer = require("multer");
-let userRouter = require("./routes/user");
-let adminRouter = require("./routes/admin");
-let flash = require("connect-flash");
-let session = require("express-session");
-let app = express();
+const logger = require("morgan");
+const hbs = require("express-handlebars");
+const multer = require("multer");
+const userRouter = require("./routes/user");
+const adminRouter = require("./routes/admin");
+const flash = require("connect-flash");
+const session = require("express-session");
+const app = express();
 const upload = multer({ dest: "uploads/" });
-let db = require("./dbconfig/connection");
+const db = require("./dbconfig/connection");
 // Require the user router
 
 // ...

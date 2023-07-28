@@ -24,17 +24,17 @@ module.exports={
     },
 
     adminHome:(async(req,res)=>{
-        let yearly = await getYearlySalesGraph()
-        let daily = await getDailySalesGraph()
-        let weekly = await getWeeklySalesGraph()
-        let totalOrders = await getTotalOrders()
-        let totalUsers = await getTotalUsers()
-        let productCount = await getAllProductCount()
-        let dailySales = await getDailySales()
-        let weeklySales = await getWeeklySales()
-        let yearlySales = await getYearlySales()
-        let data = await getAllData()
-        let orderData = await getAllOrderData()
+        const yearly = await getYearlySalesGraph()
+        const daily = await getDailySalesGraph()
+        const weekly = await getWeeklySalesGraph()
+        const totalOrders = await getTotalOrders()
+        const totalUsers = await getTotalUsers()
+        const productCount = await getAllProductCount()
+        const dailySales = await getDailySales()
+        const weeklySales = await getWeeklySales()
+        const yearlySales = await getYearlySales()
+        const data = await getAllData()
+        const orderData = await getAllOrderData()
         res.render('admin/adminHome',{ layout: 'admin-layout', admin: true,yearly,daily,weekly,totalOrders,totalUsers,productCount,dailySales,weeklySales,yearlySales,data,orderData})
     }),
 
@@ -44,17 +44,17 @@ module.exports={
         res.redirect('/admin/adminHome')
     },
     sales:(async(req,res)=>{
-        let yearly = await getYearlySalesGraph()
-        let daily = await getDailySalesGraph()
-        let weekly = await getWeeklySalesGraph()
-        let totalOrders = await getTotalOrders()
-        let totalUsers = await getTotalUsers()
-        let productCount = await getAllProductCount()
-        let dailySales = await getDailySales()
-        let weeklySales = await getWeeklySales()
-        let yearlySales = await getYearlySales()
-        let data = await getAllData()
-        let orderData = await getAllOrderData()
+        const yearly = await getYearlySalesGraph()
+        const daily = await getDailySalesGraph()
+        const weekly = await getWeeklySalesGraph()
+        const totalOrders = await getTotalOrders()
+        const totalUsers = await getTotalUsers()
+        const productCount = await getAllProductCount()
+        const dailySales = await getDailySales()
+        const weeklySales = await getWeeklySales()
+        const yearlySales = await getYearlySales()
+        const data = await getAllData()
+        const orderData = await getAllOrderData()
         res.render('admin/sales',{ layout: 'admin-layout', admin: true,yearly,daily,weekly,totalOrders,totalUsers,productCount,dailySales,weeklySales,yearlySales,data,orderData})
     }),
 
@@ -101,7 +101,7 @@ module.exports={
 
     // },
     adminBlockUser: (req, res) => {
-        let blockUserId = req.query.id
+        const blockUserId = req.query.id
         blockUser(blockUserId)
         res.redirect('/admin/alluser')
         
@@ -118,7 +118,7 @@ module.exports={
 
     // },
     adminUnBlockUser: (req, res) => {
-        let unblockUserId = req.query.id
+        const unblockUserId = req.query.id
         unblockUser(unblockUserId)
         res.redirect('/admin/alluser')
     },
@@ -147,7 +147,7 @@ module.exports={
         addProductSubmit: async (req, res) => {
             console.log(req.body)
     
-            let image = []
+            const image = []
             req.files.forEach(function (value, index) {
                 image.push(value.filename)
             })
@@ -159,14 +159,14 @@ module.exports={
         },
           
         removeProduct(req,res){
-            let prodId=req.params.id
+            const prodId=req.params.id
             deleteProduct(prodId).then((response)=>{
                 res.redirect('/admin/productTable')
             })
             
         },
         async editProduct(req,res){
-            let product=await getProductDetails(req.body.id)
+            const product=await getProductDetails(req.body.id)
 
             productHelpers.getAllcategory().then((getcategory)=>{
                 res.render('admin/editProduct', { layout: 'admin-layout',admin: true,product,getcategory})
@@ -178,7 +178,7 @@ module.exports={
         editProductSubmit(req,res){
 
             console.log(req.files,">>>>>>>>okbro<<<<<<<<")
-            let image=[]
+            const image=[]
             req.files.forEach(function (value, index) {
                 image.push(value.filename)
             })
@@ -266,7 +266,7 @@ module.exports={
     },
 
     productStatus(req, res) {
-        let data = req.body
+        const data = req.body
 
         changeProductStatus(data).then((response) => {
 
@@ -318,7 +318,7 @@ module.exports={
     },
 
     removeCoupen (req , res){
-        let coupenId = req.params.id
+        const coupenId = req.params.id
         deleteCoupen(coupenId).then((response) => {
             res.redirect('/admin/offer')
         })
@@ -333,9 +333,9 @@ module.exports={
     },
 
     editStockPost : (async(req , res) => {
-        let prodId = req.params.id
-        let product = await productHelpers.getProductDetails(prodId)
-        let stock = parseInt(req.body.stock)
+        const prodId = req.params.id
+        const product = await productHelpers.getProductDetails(prodId)
+        const stock = parseInt(req.body.stock)
         req.body.stock = stock
         productHelpers.editStock(prodId , req.body).then(() => {
             res.redirect('/admin/inventory')
@@ -349,12 +349,12 @@ module.exports={
         })
     },
     productOfferPost (req , res) {
-        let prodId = req.params.id
+        const prodId = req.params.id
         console.log(prodId,'prodIdddddddddddddddd');
         const productCode = Math.random().toString(36).substring(2, 10);
         
          productHelpers.addProductOffer(req.body , prodId , productCode).then(async(response) => {
-             let singleProduct = await productHelpers.getProductDetails(prodId)
+             const singleProduct = await productHelpers.getProductDetails(prodId)
              productHelpers.addOfferPrice(req.body , singleProduct).then((response) => {
              })
              res.redirect('/admin/productOffer')

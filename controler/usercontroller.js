@@ -104,9 +104,9 @@ module.exports = {
 
     //--------------home Page------
     homePage: async (req, res) => {
-        let user = req.session.users
+        const user = req.session.users
         let categories;
-        let cartCount = await getCartCount(user._id)
+        const cartCount = await getCartCount(user._id)
         await productHelpers.getAllcategory().then((categoryList) => {
 
             categories = categoryList;

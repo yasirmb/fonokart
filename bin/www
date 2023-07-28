@@ -5,8 +5,8 @@
  */
 
 let app = require('../app');
-let debug = require('debug')('project-8-week:server');
-let http = require('http');
+const debug = require('debug')('project-8-week:server');
+const http = require('http');
 
 /**
  * Get port from environment and store in Express.
