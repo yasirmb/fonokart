@@ -348,12 +348,7 @@ module.exports={
             res.render('admin/productOffer' , { layout: 'admin-layout', admin:true, product})
         })
     },
-    bannerManagement : ((req , res) => {
-        productHelpers.getAllBanners().then((banner) => {
-            res.render('admin/bannerManagement' , { layout : 'admin-layoutnew' , banner})
-        })
-    }),
-   
+ 
 
 
 
