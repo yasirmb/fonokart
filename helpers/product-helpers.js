@@ -90,6 +90,53 @@ module.exports={
         })
     },
 
+
+    addBanner : ((banner) => {
+        return new Promise((resolve , reject) => {
+            db.get().collection(collection.BANNER_COLLECTION).insertOne(banner).then((response) =>{
+                resolve({ id: response.insertedId })
+            })
+        })
+    }),
+
+
+    allBanner: () => {
+        return new Promise((resolve, reject) => {
+          db.connect((err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+    
+            db.get().collection(collection.BANNER_COLLECTION)
+              .find()
+              .toArray()
+              .then((response) => {
+                resolve(response);
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+        });
+      },
+
+
+
+    getAllBanners : (() => {
+        return new Promise(async(resolve , reject) => {
+            let banner =await db.get().collection(collection.BANNER_COLLECTION).find().toArray()
+            resolve(banner)
+        })
+    }),
+    removeBanner : ((bannerId) => {
+        return new Promise((resolve , reject) => {
+            db.get().collection(collection.BANNER_COLLECTION).deleteOne({_id : ObjectId(bannerId)}).then((response) => {
+                resolve()
+            })
+        })
+    }),
+
     filterByCategory:(proCategory)=>{
        
         return new Promise(async(resolve,reject)=>{
