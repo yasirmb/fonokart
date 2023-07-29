@@ -5,6 +5,58 @@
     border: none;
     outline: none;
 }
+            .order_box {
+                padding: 20px;
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .order_box h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .list li {
+                margin-bottom: 10px;
+            }
+
+            .list a {
+                text-decoration: none;
+                color: #333;
+            }
+
+            .list .middle,
+            .list .last {
+                margin-left: 10px;
+            }
+
+            #Details {
+                margin-top: 20px;
+            }
+
+            #Details .list_2 {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            #Details .list_2 li {
+                margin-bottom: 10px;
+            }
+
+            #Details .list_2 a {
+                text-decoration: none;
+                color: #666;
+            }
 </style>
 
 <section class="checkout_area section_gap">
@@ -234,44 +286,26 @@
                 </div>
 
 
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Your Order</h2>
+              <div class="col-lg-4">
+    <div class="order_box">
+        <h2>Your Order</h2>
 
-                        <ul class="list">
-                            <li><a href="#">Product <span class="middle"> Quantity</span> <span class="last">Price</span>
-                                </a></li>
-                            {{#each products}}
-                            <li><a href="#">{{this.product.name}}<span class="middle">x{{this.quantity}}</span> <span
-                                        class="last">₹ {{this.product.price}}</span></a></li>
-                            {{/each}}
-                            <li><a href="#">Total <span id="totalAmount">₹ {{total}}</span></a></li>
-                        </ul>
+        <ul class="list">
+            <li><a href="#">Product <span class="middle"> Quantity</span> <span class="last">Price</span></a></li>
+            {{#each products}}
+            <li><a href="#">{{this.product.name}}<span class="middle">x{{this.quantity}}</span> <span
+                        class="last">₹ {{this.product.price}}</span></a></li>
+            {{/each}}
+            <li><a href="#">Total <span id="totalAmount">₹ {{total}}</span></a></li>
+        </ul>
 
-
-                        <div id="Details" hidden>
-                            <ul class="list list_2">
-
-
-                                <li><a href="#">Total Price<span id="totalPrice">₹ {{total}}</span></a></li>
-                                <li><a href="#">Discount Price <span id='discountPrice'>₹ {{total}}</span></a></li>
-                                <li><a href="#">You Saved <span id="savedPrice">₹ {{total}}</span></a></li>
-
-                            </ul>
-                        </div>
-
-
-
-
-
-                        {{!-- <a class="primary-btn" href="#">Place Order</a> --}}
-
-
-
-                    </div>
-
-
-                </div>
+        <div id="Details" hidden>
+            <ul class="list list_2">
+                <li><a href="#">Total Price<span id="totalPrice">₹ {{total}}</span></a></li>
+                <li><a href="#">Discount Price <span id='discountPrice'>₹ {{total}}</span></a></li>
+                <li><a href="#">You Saved <span id="savedPrice">₹ {{total}}</span></a></li>
+            </ul>
+        </div>
 
 
 
