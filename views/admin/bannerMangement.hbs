@@ -1,0 +1,149 @@
+<div class="">
+    <div class=" row md-12">
+
+        <div class="col-md-12 ">
+
+
+
+
+
+            <main id="main" class="main">
+
+                <div class="pagetitle">
+                    <h1>General Tables</h1>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="">Product</a></li>
+                            <li class="breadcrumb-item">Table</li>
+                            <li class="breadcrumb-item active"><a href="/product-coupen">Click Here</a></li>
+                        </ol>
+                    </nav>
+
+
+                    <a href="/admin/add-banner">
+                        <button class="btn btn-dark" style="margin-left: 50px;">
+                            add banner
+                        </button>
+                    </a>
+
+
+
+                </div><!-- End Page Title -->
+
+                <section class="section">
+                    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                        <div class="col-lg-12">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Banner Table</h5>
+
+                                    <!-- Default Table -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                {{!-- <th scope="col">#</th> --}}
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each banner}}
+                                            <tr>
+                                                {{!-- <th scope="row">{{@index}}</th> --}}
+                                                <td><img src="../product-pictures/{{this.img1}}" alt=""
+                                                        style="width: 400px; height:auto"> </td>
+
+                                                <td>
+
+                                                    {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#example-{{this._id}}" value="{{this._id}}"
+                                                        name="id" id="">
+                                                        Edit
+                                                    </button> --}}
+
+                                                    <a href="/admin/delete-banner/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete {{this.model}} ?')">Delete</a>
+
+                                                </td>
+                                            </tr>
+
+
+
+                                            {{/each}}
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+                </section>
+
+            </main><!-- End #main -->
+
+
+
+
+            {{#each banner}}
+
+            <div class="modal fade" id="example-{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+                            <form class="col-md-12" action="/admin/edit-banner/{{this._id}}" method="post" enctype="">
+
+
+                                <div class="row mb-3">
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">Image Upload 1 </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="file" id="formFile" name="editbannerImage1">
+                                    </div>
+                                </div>
+
+
+                                {{!-- <div class="row mb-3">
+                                    <label for="inputNumber" class="col-sm-2 col-form-label">Image Upload 2 </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="file" id="formFile" name="editbannerImage2">
+                                    </div>
+                                </div> --}}
+
+
+
+
+                                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            </form>
+
+
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+
+        </div>
+    </div>
+</div>
