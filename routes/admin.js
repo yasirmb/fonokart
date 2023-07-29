@@ -84,7 +84,6 @@ router.get('/inventory' , inventoryManagement)
 router.post('/edit-stock/:id' , editStockPost)
 
 
-router.post('/addBannerSubmit' , upload.fields( [ { name : 'bannerImage1' , maxCount : 1 } , { name : 'bannerImage2' , maxCount : 1 } ] ), bannerSubmitPost)
 
 
 
