@@ -3,7 +3,7 @@ var router = express.Router();
 const {adminLoginpage,adminHome,loginAdmin,signOut,adminAlluser,productTable,addproduct,
   addProductSubmit,removeProduct,editProduct,dashboard,editProductSubmit,adminBlockUser,adminUnBlockUser,categorypage,
   addcategory,addCategorySubmit,getOrders,viewOrderProduct,viewOffer,addCoupenPost,removeCoupen,productStatus,
-  inventoryManagement,editStockPost,productCoupen,productOfferPost,sales,bannerManagement}=require('../controler/admincontroller')
+  inventoryManagement,editStockPost,productCoupen,productOfferPost,sales}=require('../controler/admincontroller')
 
 const{sessionCheck,loginRedirect,nocache}=require('../middlwares/admin-middlwares')
 
@@ -60,7 +60,7 @@ router.post('/edit-product/:id', upload.array('image'), editProductSubmit);
 
 router.get('/allcategory',categorypage);
 router.get('/add-category',addcategory);
-router.get('/banner' , bannerManagement)
+
 router.post('/addCategorySubmit',addCategorySubmit)
 
 
