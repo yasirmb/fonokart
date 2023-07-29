@@ -353,29 +353,11 @@ module.exports={
             res.render('admin/bannerManagement' , { layout : 'admin-layoutnew' , banner})
         })
     }),
-    addBanner : ((req , res) => {
-        res.render('adminMain/addBanner' , { layout : 'admin-layoutnew'})
-    }),
+   
 
 
 
-    bannerSubmitPost : ((req , res) => { 
-        
-        req.body.img1 = req.files.bannerImage1[0].filename
-        req.body.img2 = req.files.bannerImage2[0].filename
 
-        productHelpers.addBanner(req.body).then((response) => {
-            res.redirect('/admin/banner')
-        })
-    }),
-
-
-    deleteBanner : ((req , res) => {
-        let bannerId = req.params.id
-        productHelpers.removeBanner(bannerId).then((response) => {
-            res.redirect('/admin/banner')
-        })
-    }),
 
 
     productOfferPost (req , res) {
