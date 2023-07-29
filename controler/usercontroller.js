@@ -107,6 +107,7 @@ module.exports = {
         const user = req.session.users
         let categories;
         const cartCount = await getCartCount(user._id)
+        let banner = await productHelpers.allBanner()
         await productHelpers.getAllcategory().then((categoryList) => {
 
             categories = categoryList;
@@ -499,6 +500,7 @@ console.log(getOneAddress);
     cart: (async (req, res) => {
         let user = req.session.users
         let products = await getCartproduct(req.session.users._id)
+        let banner = await productHelpers.allBanner()
         let totalprice = await getTotalAmount(req.session.users._id)
         console.log(products, "ivnnnnnnnnn=============");
         res.render('user/user-cart', { products, user, userData: user, totalprice })
