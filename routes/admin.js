@@ -3,7 +3,7 @@ var router = express.Router();
 const {adminLoginpage,adminHome,loginAdmin,signOut,adminAlluser,productTable,addproduct,
   addProductSubmit,removeProduct,editProduct,dashboard,editProductSubmit,adminBlockUser,adminUnBlockUser,categorypage,
   addcategory,addCategorySubmit,getOrders,viewOrderProduct,viewOffer,addCoupenPost,removeCoupen,productStatus,
-  inventoryManagement,editStockPost,productCoupen,addBanner, deleteBanner,productOfferPost,sales,bannerManagement}=require('../controler/admincontroller')
+  inventoryManagement,editStockPost,productCoupen,productOfferPost,sales,bannerManagement}=require('../controler/admincontroller')
 
 const{sessionCheck,loginRedirect,nocache}=require('../middlwares/admin-middlwares')
 
@@ -82,10 +82,10 @@ router.post('/addProductOffer/:id' , productOfferPost)
 
 router.get('/inventory' , inventoryManagement)
 router.post('/edit-stock/:id' , editStockPost)
-router.get('/add-banner' , addBanner)
+
 
 router.post('/addBannerSubmit' , upload.fields( [ { name : 'bannerImage1' , maxCount : 1 } , { name : 'bannerImage2' , maxCount : 1 } ] ), bannerSubmitPost)
 
-router.get('/delete-banner/:id'  , deleteBanner)
+
 
 module.exports = router;
