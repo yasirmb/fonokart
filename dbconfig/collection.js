@@ -10,4 +10,5 @@ module.exports={
     ADDRESS_COLLECTION : 'address',
     PRODUCT_OFFER : 'productOffer' ,
     WALLET_COLLECTION : 'wallet',
+    BANNER_COLLECTION : 'banner',
 }

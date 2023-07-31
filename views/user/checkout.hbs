@@ -5,64 +5,10 @@
     border: none;
     outline: none;
 }
-
-    body {
-        margin-left: 20px;
+  .checkout_area {
+        margin-left: 40px;
     }
 
-
-            .order_box {
-                padding: 20px;
-                background-color: #f9f9f9;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .order_box h2 {
-                font-size: 20px;
-                margin-bottom: 10px;
-                color: #333;
-            }
-
-            .list {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .list li {
-                margin-bottom: 10px;
-            }
-
-            .list a {
-                text-decoration: none;
-                color: #333;
-            }
-
-            .list .middle,
-            .list .last {
-                margin-left: 10px;
-            }
-
-            #Details {
-                margin-top: 20px;
-            }
-
-            #Details .list_2 {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            #Details .list_2 li {
-                margin-bottom: 10px;
-            }
-
-            #Details .list_2 a {
-                text-decoration: none;
-                color: #666;
-            }
 </style>
 
 <section class="checkout_area section_gap">
@@ -91,10 +37,11 @@
                 <div class="col-md-4 ml-auto">
                     <form class="row contact_form" id="couponForm" action='' method="post" novalidate="novalidate">
                         <div class="cupon_area">
-                            <div class="check_title">
-                                <h2>Have a coupon? <a href="/Viewoffers">Click here to see Coupons</a>
-                                </h2>
-                            </div>
+                       <div class="check_title" style="width: 350px;">
+                        <h2>Have a coupon? <a href="/Viewoffers">Click here to see Coupons</a></h2>
+                       </div>
+
+
                             <input type="text" placeholder="Enter coupon code" id="couponInput">
                             <div><span id="errorMsg" style="color: red;"></span></div>
         
@@ -146,7 +93,7 @@
 
         
 
-        <h4 style="padding-left: 300px;">Enter Delivery Address</h4>
+        <h4 style="padding-left: 250px;">Enter Delivery Address</h4>
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">

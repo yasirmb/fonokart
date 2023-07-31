@@ -3,7 +3,8 @@ var router = express.Router();
 const {adminLoginpage,adminHome,loginAdmin,signOut,adminAlluser,productTable,addproduct,
   addProductSubmit,removeProduct,editProduct,dashboard,editProductSubmit,adminBlockUser,adminUnBlockUser,categorypage,
   addcategory,addCategorySubmit,getOrders,viewOrderProduct,viewOffer,addCoupenPost,removeCoupen,productStatus,
-  inventoryManagement,editStockPost,productCoupen,productOfferPost,sales}=require('../controler/admincontroller')
+  inventoryManagement,editStockPost,productCoupen,productOfferPost,sales, banner, addBanner, bannerSubmitPost ,deleteBanner}=require('../controler/admincontroller')
+  
 
 const{sessionCheck,loginRedirect,nocache}=require('../middlwares/admin-middlwares')
 
@@ -75,6 +76,9 @@ router.post('/product-status' , productStatus)
 router.get('/offer' , viewOffer)
 router.post('/addcoupon' , addCoupenPost)
 router.get('/delete-coupen/:id' , removeCoupen)
+router.get('/banner' ,banner)
+router.get('/add-banner', addBanner)
+router.get('/delete-banner/:id'  , deleteBanner)
 
 router.get('/productOffer',productCoupen)
 router.post('/addProductOffer/:id' , productOfferPost)
@@ -84,7 +88,7 @@ router.get('/inventory' , inventoryManagement)
 router.post('/edit-stock/:id' , editStockPost)
 
 
-
+router.post('/addBannerSubmit' , upload.fields( [ { name : 'bannerImage1' , maxCount : 1 } , { name : 'bannerImage2' , maxCount : 1 } ] ), bannerSubmitPost)
 
 
 module.exports = router;
