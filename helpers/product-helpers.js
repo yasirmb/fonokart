@@ -90,26 +90,7 @@ module.exports={
         })
     },
 
-    allBanner: () => {
-        return new Promise((resolve, reject) => {
-          db.connect((err) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-    
-            db.get().collection(collection.BANNER_COLLECTION)
-              .find()
-              .toArray()
-              .then((response) => {
-                resolve(response);
-              })
-              .catch((error) => {
-                reject(error);
-              });
-          });
-        });
-      },
+ 
 
 
 
