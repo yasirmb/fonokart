@@ -2,7 +2,7 @@ const { response } = require('express');
 
 const {doadminLoged,blockUser,unblockUser,viewCoupens,addCoupen,deleteCoupen,getYearlySalesGraph,getDailySalesGraph,getWeeklySalesGraph,
     getTotalOrders,getTotalUsers,getAllProductCount,getDailySales,getWeeklySales,getYearlySales,getAllData,getAllOrderData} = require('../helpers/admin-helpers')
-const{getAllproduct,addProduct,deleteProduct,getProductDetails,updateProduct,addProductOffer,banner}= require('../helpers/product-helpers')
+const{getAllproduct,addProduct,deleteProduct,getProductDetails,updateProduct,addProductOffer,}= require('../helpers/product-helpers')
 
 const { getAllUser,changeProductStatus} = require('../helpers/user-helpers');
 
@@ -349,16 +349,6 @@ module.exports={
         })
     },
  
-    banner : ((req , res) => {
-        productHelpers.getAllBanners().then((banner) => {
-            res.render('admin/bannerManagement' , { layout: 'admin-layout', admin:true , banner})
-        })
-    }),
-
-
-    addBanner : ((req , res) => {
-        res.render('admin/addBanner' , { layout: 'admin-layout', admin:true})
-    }),
 
 
 
