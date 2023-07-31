@@ -362,23 +362,23 @@ module.exports={
 
 
 
-    bannerSubmitPost : ((req , res) => { 
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        req.body.img1 = req.files.bannerImage1[0].filename
-        req.body.img2 = req.files.bannerImage2[0].filename
+    // bannerSubmitPost : ((req , res) => { 
+    //     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    //     req.body.img1 = req.files.bannerImage1[0].filename
+    //     req.body.img2 = req.files.bannerImage2[0].filename
 
-        productHelpers.addBanner(req.body).then((response) => {
-            res.redirect('/admin/banner')
-        })
-    }),
+    //     productHelpers.addBanner(req.body).then((response) => {
+    //         res.redirect('/admin/banner')
+    //     })
+    // }),
 
 
-    deleteBanner : ((req , res) => {
-        let bannerId = req.params.id
-        productHelpers.removeBanner(bannerId).then((response) => {
-            res.redirect('/admin/banner')
-        })
-    }),
+    // deleteBanner : ((req , res) => {
+    //     let bannerId = req.params.id
+    //     productHelpers.removeBanner(bannerId).then((response) => {
+    //         res.redirect('/admin/banner')
+    //     })
+    // }),
 
 
 
