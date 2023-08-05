@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
       cb(null, Date.now() + '-' + files.originalname)
     }
   })
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }); // as a 
 
 
 router.get('/', nocache , loginRedirect,adminLoginpage)
