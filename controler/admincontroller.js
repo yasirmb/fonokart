@@ -261,9 +261,21 @@ module.exports={
         const oneProductId = req.query.id
         console.log(oneProductId,"oooooooooo");
         productHelpers.getOrderProduct(oneProductId).then((oneOrderProduct) => {
-            res.render('admin/viewOrderProduct', { layout: 'admin-layout', admin:true, oneOrderProduct })
+            productHelpers.getAllOrders().then((order) => {
+                console.log('orderrrrrrrr',order);
+                res.render('admin/viewOrderProduct', { layout: 'admin-layout', admin:true, oneOrderProduct ,order})
+
+            })
+            
         })
     },
+    // viewOrderProduct(req, res) {
+    //     const oneProductId = req.query.id
+    //     console.log(oneProductId,"oooooooooo");
+    //     productHelpers.getOrderProduct(oneProductId).then((oneOrderProduct) => {
+    //         res.render('admin/viewOrderProduct', { layout: 'admin-layout', admin:true, oneOrderProduct })
+    //     })
+    // },
 
     productStatus(req, res) {
         const data = req.body
