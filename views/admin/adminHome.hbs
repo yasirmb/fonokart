@@ -116,6 +116,7 @@
 
             <!-- Yearly Sales -->
             <div class="col-xxl-4 col-md-6">
+
               <div class="card info-card revenue-card">
                 <div class="card-body">
                   <h5 class="card-title">Yearly Sale <span></span></h5>
@@ -146,6 +147,7 @@
           <div class="card-body">
             <h5 class="card-title">Payment Method</h5>
               <button type="button" class="btn btn-success" style="margin-left: 850px; margin-top: 20px;" onclick="generatePDF()">Download</button>
+
             <div id="pieChart"></div>
             <script>
               document.addEventListener("DOMContentLoaded", () => {
@@ -255,6 +257,7 @@
   <div class="card recent-sales overflow-auto">
     <div class="card-body">
       <button type="button" class="btn btn-success" style="margin-left: 850px; margin-top: 20px;" onclick="generatePDF()">Download</button>
+      <a href="#" id="downloadSVGButton" class="btn btn-primary mt-3" > SVG</a>
       <h5 class="card-title">Yearly Sales <span></span></h5>
       <table class="table table-borderless datatable" id="invoice">
        <thead>
@@ -289,6 +292,7 @@
   <div class="card recent-sales overflow-auto">
     <div class="card-body">
       <button type="button" class="btn btn-success" style="margin-left: 850px; margin-top: 20px;" onclick="exportToPDF()">Download</button>
+      <a href="#" id="downloadSVGButton" class="btn btn-primary mt-3" > SVG</a>
       <h5 class="card-title">Daily Sales <span></span></h5>
       <table class="table table-borderless datatable" id="invoice2">
        <thead>
@@ -323,6 +327,7 @@
   <div class="card recent-sales overflow-auto">
     <div class="card-body">
       <button type="button" class="btn btn-success" style="margin-left: 850px; margin-top: 20px;" onclick="exportsToPDF()">Download</button>
+         <a href="#" id="downloadSVGButton" class="btn btn-primary mt-3" > SVG</a>
       <h5 class="card-title">Weekly Sales <span></span></h5>
       <table class="table table-borderless datatable" id="invoice3">
        <thead>
@@ -412,6 +417,37 @@
     }
 
   </script>
+  <script>
+  // JavaScript function to trigger the download
+  function downloadSVG() {
+    // Replace the following with the code to generate your SVG content
+    // For demonstration purposes, I'll assume you have the SVG content in a variable named 'svgContent'.
+    const svgContent = `
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+        <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+      </svg>
+    `;
+
+    // Create a temporary anchor element and set its href to the SVG content
+    const svgBlob = new Blob([svgContent], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(svgBlob);
+
+    // Create a temporary link and set its href to the SVG URL
+    const downloadLink = document.createElement("a");
+    downloadLink.setAttribute("href", url);
+    downloadLink.setAttribute("download", "yearly_sales_chart.svg"); // Change the filename as needed
+
+    // Trigger the download
+    downloadLink.click();
+
+    // Clean up the temporary objects
+    URL.revokeObjectURL(url);
+  }
+
+  // Attach the downloadSVG function to the download button or link
+  document.getElementById("downloadSVGButton").addEventListener("click", downloadSVG);
+</script>
+
 
 </body>
 </html>
